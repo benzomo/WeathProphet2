@@ -56,8 +56,33 @@ namespace WealthProphet2
 
         }
 
-         
-            static public void RunR()
+        static public void FromExcel()
+        {
+
+
+            Excel.Application xlApp = new Excel.Application();
+            Excel.Workbook xlWorkBook;
+            Excel.Sheets xlWorkSheets;
+            Excel.Worksheet xlWorkSheet;
+            string currentSheet = "Sheet1";
+            object misValue = System.Reflection.Missing.Value;
+
+            
+            xlWorkBook = xlApp.Workbooks.Open("C:\\Users\\benmo\\Source\\Repos\\WealthProphet2\\ExcelTest.xlsx",0, false, 5, "", "", false, Excel.XlPlatform.xlWindows, "",true, false, 0, true, false, false);
+            xlWorkSheets = xlWorkBook.Worksheets;
+            xlWorkSheet = (Excel.Worksheet)xlWorkSheets.get_Item(currentSheet);
+            xlWorkBook.Close(true, misValue, misValue);
+            xlApp.Quit();
+
+            Marshal.ReleaseComObject(xlWorkSheets);
+            Marshal.ReleaseComObject(xlWorkSheet);
+            Marshal.ReleaseComObject(xlWorkBook);
+            Marshal.ReleaseComObject(xlApp);
+
+        }
+
+
+        static public void RunR()
         {
             
             // Set the folder in which R.dll locates.

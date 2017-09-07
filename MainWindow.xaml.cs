@@ -41,8 +41,8 @@ namespace WealthProphet2
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            App.ToExcel();
-
+            ///App.ToExcel();
+            App.FromExcel();
 
             string sql = "SELECT * FROM Variables";
 
