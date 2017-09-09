@@ -25,13 +25,50 @@ namespace WealthProphet2
     /// </summary>
     public partial class MainWindow : Window
     {
+        string sql;
+        DataSet ds;
+        SQLiteConnection m_dbC;
+        SQLiteDataAdapter dataadapter;
+        SQLiteCommandBuilder builder;
+
         public MainWindow()
         {
 
 
             InitializeComponent();
+
+            this.sql = "SELECT * FROM Variables";
+
+            this.ds = new DataSet();
+           
+           
             
-            
+            this.m_dbC = new SQLiteConnection("Data Source= C:\\Users\\benmo\\Source\\Repos\\WealthProphet2\\WealthProphet2\\DB.db;");
+            this.m_dbC.Open();
+
+            this.dataadapter = new SQLiteDataAdapter(sql, m_dbC);
+ 
+            this.dataadapter.Fill(ds, "Variables");
+
+            this.m_dbC.Close();
+
+            MyTable.ItemsSource = ds.Tables["Variables"].DefaultView;
+
+            this.builder = new SQLiteCommandBuilder(dataadapter);
+            this.builder.ConflictOption = ConflictOption.OverwriteChanges;
+    
+
+            this.dataadapter.AcceptChangesDuringUpdate = true;
+            this.dataadapter.AcceptChangesDuringFill = true;
+            this.dataadapter.InsertCommand = this.builder.GetInsertCommand();
+            this.dataadapter.InsertCommand.UpdatedRowSource = UpdateRowSource.FirstReturnedRecord;
+            this.dataadapter.UpdateCommand = this.builder.GetUpdateCommand();
+
+           
+            this.dataadapter.DeleteCommand = this.builder.GetDeleteCommand();
+
+
+
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
@@ -42,27 +79,22 @@ namespace WealthProphet2
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             ///App.ToExcel();
-            App.FromExcel();
+            ///App.FromExcel();
+            ///
+            
+            this.m_dbC.Open();
 
-            string sql = "SELECT * FROM Variables";
+            this.dataadapter.Update(this.ds.Tables["Variables"]);
+          
 
-            DataSet ds = new DataSet();
+            this.m_dbC.Close();
 
-            SQLiteConnection m_dbC;
-            m_dbC = new SQLiteConnection("Data Source= C:\\Users\\benmo\\Source\\Repos\\WealthProphet2\\WealthProphet2\\DB.db;");
-            m_dbC.Open();
 
-            SQLiteDataAdapter dataadapter = new SQLiteDataAdapter(sql, m_dbC);
-
-            dataadapter.Fill(ds, "Variables");
-
-            m_dbC.Close();
-
-            MyTable.ItemsSource = ds.Tables["Variables"].DefaultView;
 
 
         }
-        
+
+
 
     }
 

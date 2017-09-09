@@ -5,15 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WealthProphet2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="603" Width="897">
-    <Grid>
-        <Button x:Name="But1" Content="Button 1" HorizontalAlignment="Left" Margin="814,522.205,0,0" VerticalAlignment="Top" Width="75" ClickMode="Press" Click="button1_Click"/>
-        <Button x:Name="button2" Content="Button 2" HorizontalAlignment="Left" Height="24.835" Margin="814,547.165,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click"/>
-        <DataGrid x:Name="MyTable" HorizontalAlignment="Left" Height="492" Margin="10,10,0,0" VerticalAlignment="Top" Width="347" MinColumnWidth="60">
-            <DataGrid.Columns>
-                
-            </DataGrid.Columns>
-        </DataGrid>
+        Title="MainWindow" Height="786" Width="1777" OpacityMask="Black">
+    <Grid Margin="0,0,-8,-21">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="But1" Content="Button 1" HorizontalAlignment="Left" Margin="1664.5,686.665,0,0" VerticalAlignment="Top" Width="75" ClickMode="Press" Click="button1_Click" Height="19.96" Grid.Column="1"/>
+        <Button x:Name="button2" Content="Button 2" HorizontalAlignment="Left" Height="24.835" Margin="1664.5,711.625,0,0" VerticalAlignment="Top" Width="75" Click="button2_Click" Grid.Column="1" RenderTransformOrigin="1.773,0.617"/>
+        <Expander Header="View Raw Data" HorizontalAlignment="Left" Height="701.5" Margin="2,10,0,0" VerticalAlignment="Top" Width="359" Grid.Column="1">
+            <DataGrid x:Name="MyTable" HorizontalAlignment="Left" Height="492" VerticalAlignment="Top" Width="347" MinColumnWidth="60"/>
+        </Expander>
 
     </Grid>
 </Window>
