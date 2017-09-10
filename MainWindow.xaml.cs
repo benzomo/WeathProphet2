@@ -17,6 +17,7 @@ using RDotNet;
 using System.Runtime.InteropServices;
 using System.Data.SQLite;
 using System.Data;
+using System.Windows.Controls.DataVisualization.Charting;
 
 namespace WealthProphet2
 {
@@ -67,6 +68,38 @@ namespace WealthProphet2
            
             this.dataadapter.DeleteCommand = this.builder.GetDeleteCommand();
 
+            List<int> arr1 = new List<int>();
+            int i = 0;
+            foreach (DataRow row in ds.Tables["Variables"].Rows)
+            {
+        
+                arr1.Add(row.Field<int>("VarID"));
+                i++;
+            }
+            Console.WriteLine(arr1[0]);
+
+            Console.WriteLine(arr1[5]);
+
+            int[] array1 = App.GetVector(arr1);
+
+            Console.WriteLine(array1[5]);
+
+            double[][] bobby = App.ToRMatrix(array1);
+
+            Console.WriteLine(bobby[0][20]);
+
+
+            Chart1.DataContext = new KeyValuePair<string, int>[] {
+
+                new KeyValuePair<string, int>("Dog", 30),
+
+                new KeyValuePair<string, int>("Cat", 25),
+
+                new KeyValuePair<string, int>("Rat", 5),
+
+                new KeyValuePair<string, int>("Hampster", 8),
+
+                new KeyValuePair<string, int>("Rabbit", 12) };
 
 
         }
@@ -81,16 +114,50 @@ namespace WealthProphet2
             ///App.ToExcel();
             ///App.FromExcel();
             ///
-            
+
             this.m_dbC.Open();
 
             this.dataadapter.Update(this.ds.Tables["Variables"]);
-          
+
+            DataTable dt = new DataTable();
+
+            dt = this.ds.Tables["Variables"];
+
+            Chart1.DataContext = new KeyValuePair<string, int>[] {
+
+                new KeyValuePair<string, int>("Dog", 10),
+
+                new KeyValuePair<string, int>("Cat", 25),
+
+                new KeyValuePair<string, int>("Rat", 45),
+
+                new KeyValuePair<string, int>("Hampster", 8),
+
+                new KeyValuePair<string, int>("Rabbit", 2) };
+
+
+
+
 
             this.m_dbC.Close();
 
 
 
+
+        }
+
+        private void GetArray(DataTable xin, string strin)
+        {
+            Dictionary<int, int> id = new Dictionary<int, int>();
+            int i = 0;
+            foreach (DataRow row in xin.Rows)
+            {
+
+                id.Add(i, row.Field<int>(strin));
+                i++;
+            }
+
+            int[] array1 = (new List<int>(id.Values)).ToArray();
 
         }
 

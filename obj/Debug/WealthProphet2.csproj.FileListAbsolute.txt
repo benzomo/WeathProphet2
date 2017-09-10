@@ -29,3 +29,14 @@ C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\EntityFramew
 C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Data.SQLite.xml
 C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Data.SQLite.dll.config
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\obj\Debug\Interop.MSChart20Lib.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\obj\Debug\Interop.MSDATASRC.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Web.DataVisualization.Design.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Web.DataVisualization.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Forms.DataVisualization.Design.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Forms.DataVisualization.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Forms.DataVisualization.MSChartExtension.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Controls.DataVisualization.Toolkit.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\benmo\Source\Repos\WealthProphet2\WealthProphet2\bin\Debug\WPFToolkit.dll
