@@ -53,7 +53,6 @@ namespace WealthProphet2
 
             this.m_dbC.Close();
 
-            MyTable.ItemsSource = ds.Tables["Variables"].DefaultView;
 
             this.builder = new SQLiteCommandBuilder(dataadapter);
             this.builder.ConflictOption = ConflictOption.OverwriteChanges;
@@ -67,6 +66,72 @@ namespace WealthProphet2
 
            
             this.dataadapter.DeleteCommand = this.builder.GetDeleteCommand();
+
+            MyTable.ItemsSource = ds.Tables["Variables"].DefaultView;
+
+            List<string> luxS = new List<string>();
+            List<double> luxV = new List<double>();
+            List<string> basS = new List<string>();
+            List<double> basV = new List<double>();
+            List<string> survS = new List<string>();
+            List<double> survV = new List<double>();
+
+            List<double> spending = new List<double>();
+            List<double> income = new List<double>();
+
+
+            for (int loop = 0; loop < ds.Tables["Variables"].Select(" Category <> '' ").Length; loop++)
+            {
+                if ((double.Parse(ds.Tables["Variables"].Select(" Category <> ''")[loop].ItemArray[4].ToString()) > 5) & (ds.Tables["Variables"].Select(" Category <> ''")[loop].ItemArray[5].ToString().Equals("CFout") == true) )
+                {
+
+                    spending.Add(double.Parse(ds.Tables["Variables"].Select(" Category <> ''")[loop].ItemArray[4].ToString()));
+
+                }
+            }
+
+            for (int loop = 0; loop < ds.Tables["Variables"].Select(" Type = 'CFin' ").Length; loop++)
+            {   
+                    income.Add(double.Parse(ds.Tables["Variables"].Select("Type = 'CFin'")[loop].ItemArray[4].ToString()));
+
+            }
+
+
+            for (int loop = 0; loop < ds.Tables["Variables"].Select(" Category = 'LUXURY'").Length; loop++)
+            {
+                if (double.Parse(ds.Tables["Variables"].Select(" Category = 'LUXURY'")[loop].ItemArray[4].ToString()) > 0)
+                {
+                    luxS.Add(ds.Tables["Variables"].Select(" Category = 'LUXURY'")[loop].ItemArray[7].ToString());
+                    luxV.Add(double.Parse(ds.Tables["Variables"].Select(" Category = 'LUXURY'")[loop].ItemArray[4].ToString()));
+
+
+                }
+            }
+            for (int loop = 0; loop < ds.Tables["Variables"].Select(" Category = 'SURV'").Length; loop++)
+            {
+
+                if (double.Parse(ds.Tables["Variables"].Select(" Category = 'SURV'")[loop].ItemArray[4].ToString()) > 0)
+                {
+                    survS.Add(ds.Tables["Variables"].Select(" Category = 'SURV'")[loop].ItemArray[7].ToString());
+                    survV.Add(double.Parse(ds.Tables["Variables"].Select(" Category = 'SURV'")[loop].ItemArray[4].ToString()));
+
+                }
+
+
+            }
+            for (int loop = 0; loop < ds.Tables["Variables"].Select(" Category = 'BASIC'").Length; loop++)
+            {
+                if (double.Parse(ds.Tables["Variables"].Select(" Category = 'BASIC'")[loop].ItemArray[4].ToString()) > 0)
+                {
+                    basS.Add(ds.Tables["Variables"].Select(" Category = 'BASIC'")[loop].ItemArray[7].ToString());
+                    basV.Add(double.Parse(ds.Tables["Variables"].Select(" Category = 'BASIC'")[loop].ItemArray[4].ToString()));
+
+                }
+            }
+
+            Console.WriteLine(luxS[0]);
+            Console.WriteLine(luxV[0]);
+
 
             List<int> arr1 = new List<int>();
             int i = 0;
@@ -89,30 +154,30 @@ namespace WealthProphet2
             Console.WriteLine(bobby[0][20]);
 
 
-            Chart1.DataContext = new KeyValuePair<string, int>[] {
+            Chart1.DataContext = new KeyValuePair<string, double>[] {
 
-                new KeyValuePair<string, int>("Dog", 30),
+                new KeyValuePair<string, double>("Luxury", luxV.Sum()),
 
-                new KeyValuePair<string, int>("Cat", 25),
+                new KeyValuePair<string, double>("Survival", survV.Sum()),
 
-                new KeyValuePair<string, int>("Rat", 5),
+                new KeyValuePair<string, double>("Basic", basV.Sum()),
 
-                new KeyValuePair<string, int>("Hampster", 8),
+                new KeyValuePair<string, double>("Savings", income.Sum() - spending.Sum()),
 
-                new KeyValuePair<string, int>("Rabbit", 12) };
+            };
 
 
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            App.RunR();
+            App.ToExcel();
+            //App.FromExcel();
 
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            ///App.ToExcel();
-            ///App.FromExcel();
+            
             ///
 
             this.m_dbC.Open();

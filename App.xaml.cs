@@ -91,7 +91,7 @@ namespace WealthProphet2
         }
 
 
-        static public void RunR()
+        /*static public void RunR()
         {
             
             // Set the folder in which R.dll locates.
@@ -125,7 +125,7 @@ namespace WealthProphet2
             }
 
             
-        }
+        }*/
 
         static public int[] GetVector(List<int> vin)
         {
@@ -173,16 +173,10 @@ namespace WealthProphet2
 
                 return (returnval);
 
-
+                
 
             }
-
-
-
             
-
-
-
 
         }
 
